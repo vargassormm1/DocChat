@@ -6,7 +6,7 @@ import QACard from "@/components/QACard/QACard";
 import { Input } from "antd";
 import { getAIResponse } from "@/utils/api";
 import { useParams } from "next/navigation";
-import { Spin } from "antd";
+import { Spin, Alert, Space } from "antd";
 
 const Chat = () => {
   const { filename } = useParams();
@@ -18,21 +18,42 @@ const Chat = () => {
     },
   ]);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSend = async () => {
-    setMessage("");
-    setChatHistory((prev) => [...prev, { role: "You", content: message }]);
-    setLoading(true);
-    const response = await getAIResponse(filename, message);
-    setChatHistory((prev) => [
-      ...prev,
-      { role: "assistant", content: response },
-    ]);
-    setLoading(false);
+    try {
+      setMessage("");
+      setChatHistory((prev) => [...prev, { role: "You", content: message }]);
+      setLoading(true);
+      const response = await getAIResponse(filename, message);
+      setChatHistory((prev) => [
+        ...prev,
+        { role: "assistant", content: response },
+      ]);
+    } catch (error) {
+      setError(true);
+      setErrorMessage(`Error fetching AI response`);
+      console.error("Error fetching AI response:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className={styles.container}>
+      {error ? (
+        <Space
+          direction="vertical"
+          style={{
+            width: "100%",
+          }}
+        >
+          <Alert message={errorMessage} type="error" />
+        </Space>
+      ) : (
+        <></>
+      )}
       <div className={styles.chatHistory}>
         {chatHistory.map((el, id) => {
           return <QACard key={id} user={el.role} content={el.content} />;
