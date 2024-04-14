@@ -3,9 +3,18 @@
   flex-direction: column;
   align-items: center;
 }
-/* .fileUpload {
-  background-color: #fefaf6 !important;
+
+@media (max-width: 1536px) {
 }
-.fileUpload p {
-  background-color: #fefaf6 !important;
-} */
+@media (max-width: 1366px) {
+}
+@media (max-width: 1280px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 640px) {
+}
+@media (max-width: 475px) {
+}

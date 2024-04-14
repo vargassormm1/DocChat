@@ -27,3 +27,30 @@
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 1536px) {
+}
+@media (max-width: 1366px) {
+}
+@media (max-width: 1280px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 640px) {
+  .description h2 {
+    font-size: 22px;
+  }
+  .description p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 475px) {
+  /* .instructionCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } */
+}

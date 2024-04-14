@@ -19,3 +19,23 @@
   font-size: 15px;
   margin: 0;
 }
+
+@media (max-width: 1536px) {
+}
+@media (max-width: 1366px) {
+}
+@media (max-width: 1280px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 475px) {
+  .logo h1 {
+    font-size: 60px;
+  }
+  .logo p {
+    font-size: 15px;
+    margin: 0;
+  }
+}
