@@ -2,16 +2,18 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 75%;
+  height: 100vh;
 }
 .chatHistory {
-  height: 700px;
-  overflow: scroll;
+  flex: 1;
+  overflow-y: auto;
 }
 .chatForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  background-color: #fefaf6;
 }
 
 @media (max-width: 1536px) {
