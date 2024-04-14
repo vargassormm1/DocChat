@@ -1,11 +1,18 @@
 .logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #102c57;
+  z-index: 1000;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  background-color: #fefaf6;
   margin: 50px 0;
-  color: #102c57;
 }
 .logo h1 {
   font-size: 70px;
@@ -27,6 +34,9 @@
 @media (max-width: 1280px) {
 }
 @media (max-width: 1024px) {
+  .logo {
+    margin: 25px 0;
+  }
 }
 @media (max-width: 768px) {
 }
