@@ -30,12 +30,7 @@ const StartChat = () => {
       return true;
     },
     onChange(info) {
-      console.log(info.file.type);
       const { status } = info.file;
-
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
 
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`);
