@@ -1,35 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./chat.module.css";
 import QACard from "@/components/QACard/QACard";
 import { Input } from "antd";
 import { getAIResponse } from "@/utils/api";
 import { useParams } from "next/navigation";
-import { Spin, Alert, Space } from "antd";
+import { Spin, Alert, Space, Button } from "antd";
+import { SendOutlined } from "@ant-design/icons";
 
 const Chat = () => {
+  const chatHistoryRef = useRef(null);
   const { filename } = useParams();
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([
     {
-      role: "assistant",
-      content: "Do you have any questions about the PDF you just gave me?",
+      role: "PDF Buddy: ",
+      content:
+        "Welcome! Do you have any questions about the PDF you just uploaded? Feel free to ask anything, and I'll do my best to assist you.",
     },
   ]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const scrollToBottom = () => {
+    if (chatHistoryRef.current) {
+      chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+    }
+  };
+
   const onSend = async () => {
     try {
       setMessage("");
-      setChatHistory((prev) => [...prev, { role: "You", content: message }]);
+      setChatHistory((prev) => [...prev, { role: "You:", content: message }]);
       setLoading(true);
       const response = await getAIResponse(filename, message);
       setChatHistory((prev) => [
         ...prev,
-        { role: "assistant", content: response },
+        { role: "PDF Buddy: ", content: response },
       ]);
     } catch (error) {
       setError(true);
@@ -39,6 +48,10 @@ const Chat = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
 
   return (
     <div className={styles.container}>
@@ -54,22 +67,30 @@ const Chat = () => {
       ) : (
         <></>
       )}
-      <div className={styles.chatHistory}>
+      <div ref={chatHistoryRef} className={styles.chatHistory}>
         {chatHistory.map((el, id) => {
           return <QACard key={id} user={el.role} content={el.content} />;
         })}
         {loading ? <Spin /> : <></>}
       </div>
       <div className={styles.chatForm}>
-        <Input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Message AI Helper"
-          className={styles.chatInput}
-        />
-        <button onClick={onSend} className={styles.chatButton}>
-          Send
-        </button>
+        <Space.Compact
+          style={{
+            alignSelf: "center",
+            justifySelf: "center",
+            width: "100%",
+          }}
+        >
+          <Input
+            size="large"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Message AI Helper"
+          />
+          <Button size="large" onClick={onSend} type="primary">
+            <SendOutlined />
+          </Button>
+        </Space.Compact>
       </div>
     </div>
   );

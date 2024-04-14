@@ -15,10 +15,19 @@ const StartChat = () => {
     action: "/api/upload",
     beforeUpload: (file) => {
       const isPDF = file.type === "application/pdf";
+      const fileSizeLimit = 50 * 1024 * 1024;
+
       if (!isPDF) {
         message.error(`${file.name} is not a PDF file`);
+        return Upload.LIST_IGNORE;
       }
-      return isPDF || Upload.LIST_IGNORE;
+      if (file.size > fileSizeLimit) {
+        message.error(
+          `${file.name} exceeds the maximum file size limit of 50 MB`
+        );
+        return Upload.LIST_IGNORE;
+      }
+      return true;
     },
     onChange(info) {
       console.log(info.file.type);
@@ -51,11 +60,11 @@ const StartChat = () => {
           <InboxOutlined />
         </p>
         <p className="ant-upload-text">
-          Click or drag file to this area to upload
+          Click or drag a PDF file to this area to upload
         </p>
         <p className="ant-upload-hint">
-          Support for a single upload. Strictly prohibited from uploading
-          company data or other banned files.
+          Please note: Only one PDF file can be uploaded at a time. Ensure you
+          are uploading a PDF document for analysis.
         </p>
       </Dragger>
     </div>
