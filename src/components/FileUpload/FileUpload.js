@@ -1,5 +1,5 @@
 "use client";
-import styles from "./StartChat.module.css";
+import styles from "./FileUpload.module.css";
 import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
 import { useRouter } from "next/navigation";
