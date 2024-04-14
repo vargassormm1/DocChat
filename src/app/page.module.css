@@ -1,9 +1,17 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+}
+.description {
+  margin-top: 3%;
+}
+.description h2 {
+  margin: 0;
+  font-weight: 500;
+}
+.description p {
+  color: rgb(90, 90, 90);
 }
 .logo h1 {
   font-size: 70px;
@@ -13,4 +21,8 @@
 .logo p {
   font-size: 15px;
   margin: 0;
+}
+.instructionCards {
+  display: flex;
+  justify-content: center;
 }
