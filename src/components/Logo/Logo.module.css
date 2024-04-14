@@ -31,6 +31,9 @@
 @media (max-width: 768px) {
 }
 @media (max-width: 475px) {
+  .logo {
+    margin: 25px 0;
+  }
   .logo h1 {
     font-size: 60px;
   }
