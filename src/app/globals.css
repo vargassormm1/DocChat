@@ -139,17 +139,11 @@ textarea:not([rows]) {
   .container {
     width: 475px;
   }
-  body {
-    overflow: visible;
-  }
 }
 @media (max-width: 475px) {
   .container {
     width: 380px;
     padding-left: 0px;
     padding-right: 0px;
-  }
-  body {
-    overflow: visible;
   }
 }
