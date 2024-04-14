@@ -55,14 +55,25 @@ const StartChat = () => {
 
   return (
     <div className={styles.container}>
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
+      <Dragger
+        {...props}
+        className={styles.fileUpload}
+        style={{ backgroundColor: "#fefaf6", color: "#102C57" }}
+      >
+        <p
+          className="ant-upload-drag-icon"
+          style={{ backgroundColor: "#fefaf6", color: "#102C57" }}
+        >
+          <InboxOutlined
+            style={{
+              color: "#102C57",
+            }}
+          />
         </p>
-        <p className="ant-upload-text">
+        <p className="ant-upload-text" style={{ color: "#102C57" }}>
           Click or drag a PDF file to this area to upload
         </p>
-        <p className="ant-upload-hint">
+        <p className="ant-upload-hint" style={{ color: "#102C57" }}>
           Please note: Only one PDF file can be uploaded at a time. Ensure you
           are uploading a PDF document for analysis.
         </p>

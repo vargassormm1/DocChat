@@ -87,7 +87,12 @@ const Chat = () => {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Message AI Helper"
           />
-          <Button size="large" onClick={onSend} type="primary">
+          <Button
+            size="large"
+            onClick={onSend}
+            type="primary"
+            style={{ backgroundColor: "#102C57" }}
+          >
             <SendOutlined />
           </Button>
         </Space.Compact>

@@ -3,13 +3,9 @@
   flex-direction: column;
   align-items: center;
 }
-.container input {
-  padding: 5px;
-  margin: 20px;
-  width: 500px;
-  text-align: center;
+/* .fileUpload {
+  background-color: #fefaf6 !important;
 }
-
-.container button {
-  padding: 5px;
-}
+.fileUpload p {
+  background-color: #fefaf6 !important;
+} */
