@@ -11,6 +11,7 @@ import { SendOutlined } from "@ant-design/icons";
 
 const Chat = () => {
   const chatHistoryRef = useRef(null);
+  const inputRef = useRef(null);
   const { filename } = useParams();
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([
@@ -53,6 +54,10 @@ const Chat = () => {
     scrollToBottom();
   }, [chatHistory]);
 
+  useEffect(() => {
+    scrollToBottom();
+    inputRef.current.focus();
+  }, []);
   return (
     <div className={styles.container}>
       {error ? (
@@ -82,6 +87,7 @@ const Chat = () => {
           }}
         >
           <Input
+            ref={inputRef}
             size="large"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
