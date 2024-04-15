@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <h2>Welcome to AskPDF!</h2>
+        <h2>Welcome to DocChat!</h2>
         <p>
           Upload any PDF file and chat with our AI assistant to get insights,
           summaries, or answers to your questions about the content.

@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className={styles.logo}>
       <h1>
-        <a href="/">AskPDF</a>
+        <a href="/">DocChat</a>
       </h1>
       <p>Ask Away, Learn Instantly.</p>
     </div>
