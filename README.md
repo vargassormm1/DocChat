@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DocChat
 
-## Getting Started
+DocChat is a web application built with Next.js that allows users to upload PDF files and engage in conversations with an AI assistant to extract insights, summaries, or answers related to the content of the uploaded PDFs.
 
-First, run the development server:
+## How it Works
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+DocChat utilizes natural language processing (NLP) techniques to analyze the content of uploaded PDF files and generate responses to user queries based on the extracted context. Here's a breakdown of how it works:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **PDF Upload**: Users upload PDF files containing textual content to the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2. **Context Extraction**: Upon uploading a PDF, the application extracts the text content from the PDF file using the `pdf-parse` library or similar tools. This extracted text serves as the context for the AI assistant to generate responses.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Embeddings and Memory Vector Store**: The extracted text data is converted into vector embeddings, which capture the semantic meaning and context of the text. These embeddings are stored in a "Memory Vector Store" to facilitate efficient retrieval and similarity search operations.
 
-## Learn More
+4. **AI Chat Interaction**: Users engage in a chat conversation with the AI assistant, asking questions or seeking information related to the content of the uploaded PDF.
 
-To learn more about Next.js, take a look at the following resources:
+5. **Contextual Responses**: When a user sends a message/query to the AI assistant, the application sends the user's query along with the extracted context (embeddings) from the PDF to the AI service (in this case, OpenAI's GPT model).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. **Response Generation**: The AI model processes the user's query and the provided context (embeddings) to generate a response. This response is then sent back to the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+7. **Displaying Responses**: The application displays the AI-generated response in the chat interface, allowing users to view the answers, insights, or summaries provided by the AI assistant.
 
-## Deploy on Vercel
+Overall, the AI part of the DocChat application enhances user interaction by providing intelligent responses based on the content of the uploaded PDF files. It enables users to quickly obtain relevant information or insights from the documents they upload, making the application a valuable tool for document analysis and communication.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **PDF Upload**: Users can upload PDF files directly to the application.
+- **AI Chat**: Upon uploading a PDF, users can engage in a chat conversation with an AI assistant.
+- **Contextual Responses**: The AI assistant provides responses based on the context extracted from the uploaded PDFs.
+- **Error Handling**: The application includes error handling mechanisms for various scenarios, ensuring a smooth user experience.
+- **Responsive Design**: DocChat is designed to be responsive and accessible across different devices and screen sizes.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   git clone <repository-url>
+   ```
+   
+3. Set up environment variables:
+
+   ```plaintext
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+   
+5. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
