@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import { writeFile } from "fs/promises";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+
+const s3Client = new S3Client({ region: process.env.AWS_REGION });
 
 export const POST = async (req, res) => {
   if (req.method === "POST") {
@@ -19,10 +20,13 @@ export const POST = async (req, res) => {
 
       const filename = file.name.replaceAll(" ", "_");
 
-      await writeFile(
-        path.join(process.cwd(), "public/uploads/" + filename),
-        buffer
-      );
+      const uploadParams = {
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: `uploads/${filename}`,
+        Body: buffer,
+      };
+
+      await s3Client.send(new PutObjectCommand(uploadParams));
 
       return NextResponse.json({
         Message: "File uploaded successfully.",

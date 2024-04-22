@@ -3,15 +3,32 @@ import { OpenAIEmbeddings } from "@langchain/openai";
 import { CharacterTextSplitter } from "langchain/text_splitter";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import OpenAI from "openai";
-import path from "path";
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { streamToString } from "./helpers";
+
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION,
+});
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const loadAndSplitPDF = (fileName) => {
-  const filePath = path.join(process.cwd(), "public/uploads/" + fileName);
-  const loader = new PDFLoader(filePath);
+const fetchPdfFromS3 = async (fileName) => {
+  const command = new GetObjectCommand({
+    Bucket: process.env.AWS_S3_BUCKET,
+    Key: `uploads/${fileName}`,
+  });
+  const { Body } = await s3Client.send(command);
+  const buffer = streamToString(Body);
+  return {
+    arrayBuffer: () => Promise.resolve(buffer),
+  };
+};
+
+const loadAndSplitPDF = async (fileName) => {
+  const pdfData = await fetchPdfFromS3(fileName);
+  const loader = new PDFLoader(pdfData);
   return loader.loadAndSplit(
     new CharacterTextSplitter({
       separator: ". ",
@@ -43,9 +60,9 @@ export const getResponse = async (fileName, userQuestion) => {
         {
           role: "user",
           content: `Answer the following question using the provided context. If you cannot answer the question with the context, don't lie and make up stuff. Just say you need more context.
-              Question: ${userQuestion}
+            Question: ${userQuestion}
 
-              Context: ${results.map((r) => r.pageContent).join("\n")}`,
+            Context: ${results.map((r) => r.pageContent).join("\n")}`,
         },
       ],
     });
