@@ -50,7 +50,7 @@ export const getResponse = async (fileName, userQuestion) => {
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      temperature: 0,
+      temperature: 0.5,
       messages: [
         {
           role: "assistant",
@@ -59,9 +59,8 @@ export const getResponse = async (fileName, userQuestion) => {
         },
         {
           role: "user",
-          content: `Answer the following question using the provided context. If you cannot answer the question with the context, don't lie and make up stuff. Just say you need more context.
-            Question: ${userQuestion}
-
+          content: `Please answer the following question based on the provided context. If the context is insufficient, let me know that more information is needed rather than making something up.
+            Question: ${userQuery}
             Context: ${results.map((r) => r.pageContent).join("\n")}`,
         },
       ],
