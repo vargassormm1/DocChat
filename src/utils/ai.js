@@ -60,7 +60,7 @@ export const getResponse = async (fileName, userQuestion) => {
         {
           role: "user",
           content: `Please answer the following question based on the provided context. If the context is insufficient, let me know that more information is needed rather than making something up.
-            Question: ${userQuery}
+            Question: ${userQuestion}
             Context: ${results.map((r) => r.pageContent).join("\n")}`,
         },
       ],
